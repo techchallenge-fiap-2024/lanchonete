@@ -16,34 +16,30 @@ public class ClienteService implements BuscarClienteUseCase, CadastrarClienteUse
 		this.clienteRepositorio = clienteRepositorio;
 	}
 	
-	
+
+
 	@Override
-	public Optional<Cliente> buscar(CPF cpf) {
+	public Optional<Cliente> get(CPF cpf) {
 	    if (cpf.isNull())
 	    	return Optional.empty();
-	    return clienteRepositorio.buscar(cpf);
+	    return clienteRepositorio.get(cpf);
 	}
 
-	
+	@Override
+	public Optional<Integer> getId(CPF cpf) {
+		if (cpf.isNull())
+			return Optional.empty();
+		return clienteRepositorio.getId(cpf);
+	}
+
+
 	@Override
 	public Cliente cadastrar(CPF cpf, String nome, String email) {
-	    if (cpf.isNull())
-			throw new IllegalArgumentException("'cpf' é obrigatório");
-	    if (nome == null || nome.isBlank() || nome.isEmpty())
-			throw new IllegalArgumentException("'nome' é obrigatório");
-	    nome = nome.trim();
-	
-	    if (email == null || email.isBlank() || email.isEmpty())
-			throw new IllegalArgumentException("'email' é obrigatório");
-	    email = email.trim();
-	    
-		Optional<Cliente> potencialCliente = buscar(cpf);
-		if (potencialCliente.isPresent())
-			throw new JaExisteUmClienteComEsseCPF(cpf);
-		
+		if (cpf.isNull())
+			throw new IllegalArgumentException("Obrigatório cpf para cadastrar ciente");
+
 		Cliente cliente = new Cliente(cpf, nome, email);
 		clienteRepositorio.salvar(cliente);
 		return cliente;
 	}
-
 }

@@ -11,8 +11,8 @@ import lanchonete.aplicacao.porta.out.persistencia.ClienteRepositorio;
 
 public class ClienteRepositorioMemoria implements ClienteRepositorio {
 
-	private AtomicInteger id = new AtomicInteger();
-	private Map<Integer, Cliente> clientes;
+	private static AtomicInteger id = new AtomicInteger();
+	private static Map<Integer, Cliente> clientes;
 
 	public ClienteRepositorioMemoria() {
 		this.clientes = new HashMap<>();
@@ -20,11 +20,18 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
 
 
 	@Override
-	public Optional<Cliente> buscar(CPF cpf) {
-		return clientes.entrySet().stream()
-			.map(i -> i.getValue())
+	public Optional<Cliente> get(CPF cpf) {
+		return clientes.values().stream()
 			.filter(c -> c.getCpf().equals(cpf))
 			.findFirst();
+	}
+
+	@Override
+	public Optional<Integer> getId(CPF cpf) {
+		return clientes.values().stream()
+				.filter(c -> c.getCpf().equals(cpf))
+				.map(Cliente::getId)
+				.findFirst();
 	}
 
 	@Override

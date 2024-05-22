@@ -5,6 +5,6 @@ import lanchonete.aplicacao.dominio.produto.Produto;
 
 public interface AdicionarProdutoUseCase {
 
-	void adicionarProduto(Combo combo, Produto produto);
+	void adicionar(Combo combo, Produto produto);
 	
 }

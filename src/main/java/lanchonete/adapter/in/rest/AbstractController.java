@@ -28,15 +28,24 @@ public class AbstractController {
 	protected ClientErrorException badRequest(String mensagem) {
 		return new ClientErrorException(mensagem(Response.Status.BAD_REQUEST, mensagem));
 	}
+
+	protected Response notExist() {
+		return Response.noContent().build();
+	}
 	
-	protected Response mensagem(Response.Status status, String mensagem) { 
+	protected Response mensagem(Response.Status status, String mensagem) {
 		ErroRest erroEntity = new ErroRest(status.getStatusCode(), mensagem);
     	return Response.status(status).entity(erroEntity).build();
 	}
 
 	protected <T> T lerJson(String json, Class<T> klass) {
-		return JsonbBuilder.create(JSONB_CONFIG)
-				.fromJson(json, klass);
+		try {
+            return JsonbBuilder.create(JSONB_CONFIG)
+					.fromJson(json, klass);
+		} catch (Exception e) {
+			throw badRequest("Erro ao ler json");
+		}
+
 	}
 	
 }

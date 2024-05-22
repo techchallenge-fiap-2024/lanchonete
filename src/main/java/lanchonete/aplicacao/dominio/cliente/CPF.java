@@ -1,8 +1,13 @@
 package lanchonete.aplicacao.dominio.cliente;
 
+import jakarta.json.bind.annotation.JsonbTypeDeserializer;
+import jakarta.json.bind.annotation.JsonbTypeSerializer;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonbTypeDeserializer(CPFDeserializer.class)
+@JsonbTypeSerializer(CPFSerializer.class)
 public final class CPF implements Comparable<CPF>, Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final CPF NULL = new CPF();

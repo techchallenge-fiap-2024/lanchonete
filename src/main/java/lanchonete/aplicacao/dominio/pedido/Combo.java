@@ -6,16 +6,18 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import lanchonete.aplicacao.dominio.cliente.Cliente;
+import lanchonete.aplicacao.dominio.cliente.IdentificadorDoCliente;
 import lanchonete.aplicacao.dominio.produto.TipoDeProduto;
 
 public class Combo {
-	private Long id;
+	private Integer id;
 	private Integer clienteId;
+	private String identificadorDoCliente;
 	private Map<TipoDeProduto,ComboItem> itens;
 	private SituacaoDoCombo situacao;
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAlteracao;
-	
+
 	public Combo() {
 		this.itens = new EnumMap<>(TipoDeProduto.class);
 		this.situacao = SituacaoDoCombo.CRIADO;
@@ -27,15 +29,22 @@ public class Combo {
 		this.situacao = SituacaoDoCombo.CRIADO;
 		this.dataCriacao = LocalDateTime.now();
 	}
-	
-	public Long getId() {
+
+	public Combo(IdentificadorDoCliente identificadorDoCliente) {
+	}
+
+	public Integer getId() {
 		return id;
 	}
 	
 	public Integer getClienteId() {
 		return clienteId;
 	}
-	
+
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
+	}
+
 	public Map<TipoDeProduto, ComboItem> getItens() {
 		return itens;
 	}
@@ -66,5 +75,8 @@ public class Combo {
 	public void alterado() {
 		this.dataAlteracao = LocalDateTime.now();
 	}
-	
+
+	public void setIdentificadorDoCliente(String identificador) {
+		this.identificadorDoCliente = identificador;
+	}
 }

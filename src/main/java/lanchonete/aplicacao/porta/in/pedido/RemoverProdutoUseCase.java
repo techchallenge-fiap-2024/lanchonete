@@ -5,6 +5,6 @@ import lanchonete.aplicacao.dominio.produto.Produto;
 
 public interface RemoverProdutoUseCase {
 
-	void removerProduto(Combo combo, Produto produto);
+	void remover(Combo combo, Produto produto);
 	
 }

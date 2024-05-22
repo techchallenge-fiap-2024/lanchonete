@@ -19,7 +19,7 @@ public class ClienteRepositorioJpa implements ClienteRepositorio {
 
 
 	@Override
-	public Optional<Cliente> buscar(CPF cpf) {
+	public Optional<Cliente> get(CPF cpf) {
 		try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 			Query query = entityManager.createNativeQuery("""
 					SELECT *
@@ -35,6 +35,11 @@ public class ClienteRepositorioJpa implements ClienteRepositorio {
 				return Optional.empty();
 			}
 		}
+	}
+
+	@Override
+	public Optional<Integer> getId(CPF cpf) {
+		return Optional.empty();
 	}
 
 	@Override

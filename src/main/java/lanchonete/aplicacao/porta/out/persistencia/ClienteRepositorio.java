@@ -7,7 +7,9 @@ import lanchonete.aplicacao.dominio.cliente.Cliente;
 
 public interface ClienteRepositorio {
 
-	Optional<Cliente> buscar(CPF cpf);
+	Optional<Cliente> get(CPF cpf);
+
+	Optional<Integer> getId(CPF cpf);
 
 	void salvar(Cliente cliente);
 
