@@ -1,4 +1,4 @@
-package com.bytelanches.adapter.out.mercadolivre;
+package com.bytelanches.adapter.out.pagamento.mercadolivre;
 
 import com.bytelanches.aplicacao.dominio.pagamento.SituacaoDoPagamento;
 import com.bytelanches.aplicacao.dominio.pedido.Pedido;
